@@ -1,7 +1,23 @@
+# Core Flask dependencies
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# AI/ML dependencies
+torch==2.1.0
+transformers==4.35.0
 numpy==1.25.2
+
+# Audio processing
 sounddevice==0.4.7
 faster-whisper==0.9.1
 ctranslate2==3.25.1
-torch==2.1.0
 
+# Translation and language detection
+langdetect==1.0.9
+sentencepiece==0.1.99
 
+# Video/audio downloading
+yt-dlp==2023.11.16
+
+# Additional utilities
+requests==2.31.0
