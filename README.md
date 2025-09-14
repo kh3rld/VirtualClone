@@ -1,5 +1,49 @@
-realtime_transcription.py
-This script uses the faster_whisper model to transcribe audio from an audio/video file or live from your microphone.  Simply run python realtime_transcription.py to begin live
-transcription; the application will process audio in real-time, show the language that has been detected, and print the text every few seconds.  The script will transcribe the entire
-file with timestamps and display the detected language if you run python realtime_transcription.py --file /path/to/file.  To end live transcription, press Ctrl + C.  Make sure you
-have installed Python 3.8+ and the necessary packages (faster-whisper, numpy, and sounddevice).
+# virtual clone
+
+ai powered chat system with audio transcription capabilities. Built with Flask, Whisper AI, and transformer models
+
+## quick start
+
+**prerequisites:** Python 3.11+
+
+```bash
+git clone https://github.com/rmant7/VirtualClone
+cd VirtualClone
+git checkout develop
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
+```
+
+Access: `http://localhost:5050`
+
+## Features
+
+- **AI Chat System**: Context-aware conversations with response diversity
+- **Audio Transcription**: Real-time processing with Whisper AI
+- **Multilingual Support**: Auto-translation for multiple languages
+- **Document Processing**: Upload and process PDFs, audio files
+- **Link Processing**: Extract content from YouTube links
+
+## Key Improvements
+
+- Fixed response repetition issues
+- Conversation memory and context awareness
+- Smart response selection with multiple candidates
+- Efficient session management
+
+## Usage
+
+**Chat Interface:** `http://localhost:5050`
+**Audio Transcription:** `python realtime_transcription.py`
+**Document Upload:** `http://localhost:5050/upload`
+**Link Processing:** `http://localhost:5050/links`
+
+## Development
+
+```bash
+python test_conversation_context.py  
+python test_conversation_demo.py     
+```
+
