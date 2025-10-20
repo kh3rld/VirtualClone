@@ -2,10 +2,25 @@
 import os
 import subprocess
 import json
-from faster_whisper import WhisperModel
 
-#model = whisper.load_model('base')
-model = WhisperModel("tiny")
+# Optional import: make faster_whisper lazy/optional to avoid heavy dependency during tests
+try:
+    from faster_whisper import WhisperModel  # type: ignore
+    _FW_AVAILABLE = True
+except Exception:  # pragma: no cover - environments without faster_whisper
+    WhisperModel = None  # type: ignore
+    _FW_AVAILABLE = False
+
+# Lazy model initialization
+_model = None
+
+def _get_model():
+    global _model
+    if _model is None:
+        if WhisperModel is None:
+            raise RuntimeError("faster_whisper is not installed; transcription is unavailable.")
+        _model = WhisperModel("tiny")
+    return _model
 
 def extract_audio(video_path, audio_path):
     try:
@@ -27,6 +42,7 @@ def transcribe_audio(audio_path):
         if not os.path.exists(audio_path) or not is_valid_audio(audio_path):
             raise Exception(f"Invalid audio file: {audio_path}")
         
+        model = _get_model()
         segments, info = model.transcribe(audio_path)
         text = " ".join([segment.text for segment in segments if segment.text.strip()])
         #result = model.transcribe(audio_path)
